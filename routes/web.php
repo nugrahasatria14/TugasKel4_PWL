@@ -90,4 +90,5 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+// Panggil rute keamanan (login/logout) cukup SATU KALI saja
 require __DIR__.'/auth.php';
