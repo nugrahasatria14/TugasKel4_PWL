@@ -30,10 +30,32 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-   
-   
+    // ==============================================================
+    // RUTE ORANG 2 - TRANSAKSI & KASIR
+    // ==============================================================
+    Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
+    Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+    Route::get('/struk/{id}', [TransaksiController::class, 'cetakStruk'])->name('transaksi.struk');
+    Route::get('/struk/{id}/pdf', [TransaksiController::class, 'cetakPDF'])->name('transaksi.struk.pdf');
 
+    // ==============================================================
+    // RUTE ORANG 3 - GUDANG & PELAPORAN
+    // ==============================================================
+    Route::get('/stok/mutasi', [MutasiStokController::class, 'create'])->name('stok.mutasi.create');
+    Route::post('/stok/mutasi', [MutasiStokController::class, 'store'])->name('stok.mutasi.store');
+    Route::get('/stok/opname', [StokOpnameController::class, 'index'])->name('stok.opname.index');
+    Route::post('/stok/opname', [StokOpnameController::class, 'store'])->name('stok.opname.store');
+    
+    Route::get('/supervisi/transaksi', [SupervisiController::class, 'index'])->name('supervisi.transaksi');
+    Route::get('/laporan/manager', [LaporanController::class, 'index'])->name('laporan.manager');
+    Route::get('/manager/stok', [LaporanController::class, 'stokToko'])->name('manager.stok');
+    Route::get('/laporan/cabang/{id}', [LaporanController::class, 'percabang'])->name('laporan.percabang');
+
+
+    // ==============================================================
     // RUTE ORANG 1 (SATRIA) - MASTER DATA & OWNER
+    // ==============================================================
+    
     // 1. Master Barang
     Route::get('/master/barang', [BarangController::class, 'index'])->name('master.barang');
     Route::get('/master/barang/create', [BarangController::class, 'create'])->name('master.barang.create');
@@ -67,6 +89,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/owner/laporan/pdf', [OwnerController::class, 'cetakPDF'])->name('owner.laporan.pdf');
 
 });
-
 
 require __DIR__.'/auth.php';
