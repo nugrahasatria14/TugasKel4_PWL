@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            
+            // --- INI 2 BARIS YANG WAJIB DITAMBAHKAN ---
+            $table->string('role')->default('kasir'); 
+            $table->foreignId('cabang_id')->nullable()->constrained('cabangs')->cascadeOnDelete();
+            // ------------------------------------------
+
             $table->rememberToken();
             $table->timestamps();
         });
